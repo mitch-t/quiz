@@ -1,0 +1,30 @@
+.time{
+    text-align: right;
+}
+#question {
+    font-family: "monospace";
+    text-align: center;
+    font-size: 30px;
+    color: #2b196b;
+}
+
+
+#btn0, #btn1, #btn2, #btn3 {
+    background-color: #01BBFF;
+    width: 25%;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #1D3C6A;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px;
+}
+.buttons{
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+}
+/*.question-container{
+
+}
