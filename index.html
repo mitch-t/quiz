@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Code Quiz</title>
+
+  <!-- bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"/>
+
+  <link rel="stylesheet" href="stylequiz.css"/>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class = "highscore button"></div>
+        <button type="button" class="btn btn-light btn-rounded" id="highscore">Highscore</button>
+        <a class="navbar-brand"><h4 class="time"></h4></a>  
+    </div>
+    </nav> 
+    <!-- Overall Bootstrap Grid -->
+<div class="container">
+  
+  <!-- Jumbotron with Title -->
+<div class="jumbotron">
+    <h1 class="text-center">
+      <strong>Code Quiz</strong>
+    </h1>
+    <button type="button" class="btn btn-light btn-rounded" id="start">Start</button>
+  <div class="row">
+    
+
+  <div class="col-lg-12">
+    
+      <div id="quiz">
+
+          <p id="question"></p>
+
+          <div class="buttons">
+            <ul>
+             <li><button id="btn0"><span id="choice0"></span></button></li>
+              <li><button id="btn1"><span id="choice1"></span></button></li>
+             <li><button id="btn2"><span id="choice2"></span></button></li> 
+             <li><button id="btn3"><span id="choice3"></span></button></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="quiz.js"></script>
+ 
+</body>
+</html>
