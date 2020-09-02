@@ -22,7 +22,9 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
         
-        <button type="button" class="btn btn-light btn-rounded" id ="start">start</button>
+    <div id = "start">
+      <button onclick="removeStart()">Start!</button>
+    </div>  
 
         <!--timer-->
           
@@ -42,15 +44,16 @@
     
   <div class="col-lg-12">
     <!--Quiz-->
-      <div class="grid">
-        <div id="quiz">
+
+      <div id="quiz">
         <!-- question-->
         <p id="question"></p>
-  <div id = "choiceBtns">
-              <button id="btn0"></button>
-              <button id="btn1"></button>
-              <button id="btn2"></button>
-              <button id="btn3"></button>
+
+  <div id ="choiceBtns" class ="btn-grid">
+              <button class="btn">answer0</button>
+              <button class="btn">answer1</button>
+              <button class="btn">answer2</button>
+              <button class="btn">answer3</button>
             </div>
           </div>
         
