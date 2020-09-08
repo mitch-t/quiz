@@ -100,7 +100,7 @@ function NextQuestion() {
 }
 
 function selectAnswer(e) {
-  if (questionsArray[questionIndex].answer("") === questionsArray[questionIndex].correct ("")){
+  if (questionsArray[questionIndex].answer === questionsArray[questionIndex].correct){
     score++;}
   NextQuestion();
 }
