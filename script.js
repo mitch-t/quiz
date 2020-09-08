@@ -110,7 +110,7 @@ function selectAnswer(e) {
 //Where it all starts and ends
 startbtn.addEventListener("click", function (event) {
   setTime();
-  generateQuestion();
+  NextQuestion();
 
 });
 
