@@ -1,7 +1,7 @@
 var startbtn= document.querySelector('#start');
 var quiz = document.getElementById("quiz");
 var questionELement = document.getElementById("question");
-var choiceBtnsElement =document.querySelector('#choiceBtns');
+var choiceBtnsElement = document.querySelector('#choiceBtns');
 var answerbtnsElement = document.getElementsByClassName('btns')
 var questionIndex = 0;
 var answerIndex = 0;
@@ -55,25 +55,27 @@ if(secondsLeft === 0) {
 }
 }, 1000);
 }
+
+function selectAnswer(e){}
 //Questions
 
 
 function generateQuestion(){
     document.querySelector('#question').textContent =
-    questionsArray[questionIndex].question
-    document.querySelector('#choiceBtns').textContent =
-    questionsArray[answerIndex].answer
+    questionsArray[questionIndex].question;
+    //document.querySelector('#choiceBtns').textContent =
+   // questionsArray[answerIndex].answer;
 
-    question.answer.forEach(answer=>{
+
+    questionsArray[answerIndex].answer.forEach(answer=>{
     var button = document.createElement('button')
-    button;innerText = answer.textContent
+    button.textContent = answer
     button.classList.add('btn')
-    if(answer.correct){
-    button.dataset.correct=answer.corrrect
- 
+
+   
      button.addEventListener('click',selectAnswer)
- answerbtnsElement.appendChild(button)
-   }
+ ChoiceBtnsElement.appendChild(button)
+   
 } )
 }
 
@@ -83,7 +85,7 @@ function NextQuestion(){
     generateQuestion();
 }
 
-function selectAnswer(e){}
+
 //Choices
 //function answerChoices(){}
 
@@ -102,6 +104,7 @@ startbtn.addEventListener('click', function(event){
 //generateQuestion();
 //});
 
+};
 //start button disapear
 function removeStart() {
     var myobj = document.getElementById("start");
