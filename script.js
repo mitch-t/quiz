@@ -89,6 +89,19 @@ function generateQuestion() {
   });
 }
 
+function showScores() {
+  var gameOverHTML = "<h1>YOUR SCORE!</h1>";
+  gameOverHTML += "<h2 id='score'> " + score + "</h2>";
+  var element = document.getElementById("quiz");
+  element.innerHTML = gameOverHTML;
+}
+
+function selectAnswer(e) {
+  if (questionsArray[questionIndex].answer.textContent === questionsArray[questionIndex].correct.textContent){
+    score++; }
+  NextQuestion();
+}
+
 function NextQuestion() {
   questionIndex++;
   if (questionIndex === questionsArray.length) {
@@ -99,14 +112,6 @@ function NextQuestion() {
   }
 }
 
-function selectAnswer(e) {
-  if (questionsArray[questionIndex].answer === questionsArray[questionIndex].correct){
-    score++;}
-  NextQuestion();
-}
-//Choices
-//function answerChoices(){}
-
 //Where it all starts and ends
 startbtn.addEventListener("click", function (event) {
   setTime();
@@ -114,15 +119,9 @@ startbtn.addEventListener("click", function (event) {
 
 });
 
+
 //start button disapear
 function removeStart() {
   var myobj = document.getElementById("start");
   myobj.remove();
 }
-function showScores() {
-  var gameOverHTML = "<h1>YOUR SCORE!</h1>";
-  gameOverHTML += "<h2 id='score'> " + score + "</h2>";
-  var element = document.getElementById("quiz");
-  element.innerHTML = gameOverHTML;
-}
-
