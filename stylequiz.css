@@ -1,3 +1,7 @@
+#start{
+    background-color: rgb(173, 196, 209);
+    border: 1px solid #1D3C6A;
+}
 .time{
     text-align: right;
 }
@@ -24,8 +28,4 @@
 }
 .choiceBtns{
     text-align: center;
-
-}
-/*.question-container{
-
 }

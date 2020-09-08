@@ -2,7 +2,7 @@ var startbtn = document.querySelector("#start");
 var quiz = document.getElementById("quiz");
 var questionELement = document.getElementById("question");
 var choiceBtnsElement = document.querySelector("#choiceBtns");
-
+var score = 0;
 var questionIndex = 0;
 
 var questionsArray = [
@@ -61,7 +61,7 @@ var timeElement = document.querySelector(".time");
 var secondsLeft = 60;
 var timerInterval;
 function setTime() {
-   timerInterval = setInterval(function () {
+  timerInterval = setInterval(function () {
     secondsLeft--;
     timeElement.textContent = secondsLeft + " seconds left!";
 
@@ -91,19 +91,17 @@ function generateQuestion() {
 
 function NextQuestion() {
   questionIndex++;
- if(questionIndex === questionsArray.length){
-     
-     clearInterval(timerInterval)
-     showScores()
- }
- else{
+  if (questionIndex === questionsArray.length) {
+    clearInterval(timerInterval);
+    showScores();
+  } else {
     generateQuestion();
- }
-  
+  }
 }
 
 function selectAnswer(e) {
-    //evaluate right and wrong answers/choices
+  if (questionsArray[questionIndex].answer("") === questionsArray[questionIndex].correct ("")){
+    score++;}
   NextQuestion();
 }
 //Choices
@@ -113,19 +111,18 @@ function selectAnswer(e) {
 startbtn.addEventListener("click", function (event) {
   setTime();
   generateQuestion();
-  
-});
 
-//choiceBtns.addEventListener('click',function(){
-//NextQuestion();
-//generateQuestion();
-//});
+});
 
 //start button disapear
 function removeStart() {
   var myobj = document.getElementById("start");
   myobj.remove();
 }
-function showScores(){
-
+function showScores() {
+  var gameOverHTML = "<h1>YOUR SCORE!</h1>";
+  gameOverHTML += "<h2 id='score'> " + score + "</h2>";
+  var element = document.getElementById("quiz");
+  element.innerHTML = gameOverHTML;
 }
+
