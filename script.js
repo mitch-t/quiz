@@ -1,127 +1,173 @@
-var startbtn = document.querySelector("#start");
-var quiz = document.getElementById("quiz");
-var questionELement = document.getElementById("question");
-var choiceBtnsElement = document.querySelector("#choiceBtns");
-var score = 0;
-var questionIndex = 0;
+// Main content 
+var questionsEl = document.querySelector(".questions-choices");
+var finalScoreEl= document.querySelector(".finalScore");
+var currentQuestion={};
+var scoreEl= document.querySelector(".highScore");
 
-var questionsArray = [
-  {
-    question:
-      "Which of the following are you must likely to use to style a webpage?",
-    answer: ["pencil", "CSS", "printer", "PowerPoint"],
-    correct: "CSS",
-  },
-  {
-    question:
-      "Which of the following are you most likely to use to animate a webpage?",
-    answer: ["javascript", "CSS", "pencil", "documents"],
-    correct: "javascript",
-  },
-  {
-    question: "What does html stand for?",
-    answer: [
-      "javascript",
-      "Hypertext Markup Langauge",
-      "Hypertech Linguistics",
-      "Hiddentext Magic Langauge",
-    ],
-    correct: "Hypertext Markup Langauge",
-  },
-  {
-    question: "How do you create a function in Javascript?",
-    answer: [
-      "function = myFunction()",
-      "function myFunction",
-      "function: myFunction",
-      "$={}",
-    ],
-    correct: "function myFunction",
-  },
-  {
-    question: "How do you write a comment in Javascript?",
-    answer: [
-      "//this is a comment",
-      "<!--this is a comment-->",
-      "(this is a comment)",
-      "just write it bro!",
-    ],
-    correct: "//this is a comment",
-  },
-  {
-    question: "Which event occurs when the user clicks on an HTML element?",
-    answer: ["alert", "mouseClick", "hover", "click"],
-    correct: "click",
-  },
-];
-
-//Timer
-var timeElement = document.querySelector(".time");
-
-var secondsLeft = 60;
+// timer variables
+var secondsLeft= 75;
 var timerInterval;
-function setTime() {
-  timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeElement.textContent = secondsLeft + " seconds left!";
+var timerEl = document.querySelector(".timer");
 
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-      showScores();
-    }
-  }, 1000);
-}
-//Questions
+// Buttons 
+var submitBtn= document.querySelector("#submit");
+var returnBtn= document.querySelector("#goBack");
 
-function generateQuestion() {
-  console.log(questionIndex);
-  document.querySelector("#question").textContent =
-    questionsArray[questionIndex].question;
+// User Input
+var initialEl = document.querySelector("#initials");
+var scoreForm = document.querySelector("#scoreForm");
+var listScores = document.querySelector("#listScores");
+var userInitials = [];
 
-  choiceBtnsElement.innerHTML = "";
-  questionsArray[questionIndex].answer.forEach((answer) => {
-    var button = document.createElement("button");
-    button.textContent = answer;
-    button.classList.add("btn");
+// hide content
+document.querySelector(".finalScore").style.display="none";
+document.querySelector(".highPage").style.display="none";
 
-    button.addEventListener("click", selectAnswer);
-    choiceBtnsElement.appendChild(button);
-  });
-}
-
-function showScores() {
-  var gameOverHTML = "<h1>YOUR SCORE!</h1>";
-  gameOverHTML += "<h2 id='score'> " + score + "</h2>";
-  var element = document.getElementById("quiz");
-  element.innerHTML = gameOverHTML;
-}
-
-function selectAnswer(e) {
-  if (questionsArray[questionIndex].answer.textContent === questionsArray[questionIndex].correct.textContent){
-    score++; }
-  NextQuestion();
-}
-
-function NextQuestion() {
-  questionIndex++;
-  if (questionIndex === questionsArray.length) {
-    clearInterval(timerInterval);
-    showScores();
-  } else {
-    generateQuestion();
-  }
-}
-
-//Where it all starts and ends
-startbtn.addEventListener("click", function (event) {
-  setTime();
-  NextQuestion();
-
+//return button event listener click
+returnBtn.addEventListener("click", function () {
+    location.reload()
 });
 
-
-//start button disapear
-function removeStart() {
-  var myobj = document.getElementById("start");
-  myobj.remove();
+// timer function when 0
+function setTime() {
+    timerInterval = setInterval(function () {
+        secondsLeft--;
+        timerEl.textContent = "Time Left: " + secondsLeft;
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            document.querySelector(".finalScore").style.display = "block";
+            document.querySelector(".timer").style.display = "none";
+            document.querySelector(".questions-choices").style.display = "none";
+            scoreEl.textContent = "Total score = " + secondsLeft;
+        }
+    }, 1000);
 }
+
+// start button event listener
+const startBtn = document.querySelector("#startBtn");
+
+startBtn.addEventListener("click",function () {
+    setTime();
+    startBtn.style.display="none";
+    document.querySelector(".homePage").style.display="none";
+    enterQuestions(questionIndex);
+} )
+
+var questionIndex = 0;
+// enter questions and choices
+function enterQuestions(){  
+
+    questionsEl.textContent = "";
+    var question = questions[questionIndex];
+    var questionDiv = document.createElement("div");
+    var questionText = document.createElement("h2");
+    questionText.textContent = question.title;
+    questionDiv.appendChild(questionText)
+
+
+    for(var i=0; i < question.Choices.length ;i++) {  
+        var option = document.createElement("button");
+        option.textContent= question.Choices[i];
+        option.setAttribute("class","option");
+        option.addEventListener("click",function(e) {
+            var optionChosen = (e.target.innerHTML);
+// alert user to answer choice
+            if(optionChosen === questions[questionIndex].answer){  
+
+                alert("correct!");
+                enterQuestions(questionIndex++);
+            }
+            else{   
+                alert("Wrong!");
+                enterQuestions(questionIndex++);
+                secondsLeft -=15;
+            }
+                
+            
+        });
+
+        if (questionIndex == questions.length - 1){ 
+            clearInterval(timerInterval);
+            document.querySelector(".finalScore").style.display="block";
+            document.querySelector(".timer").style.display="none";
+            scoreEl.textContent= "Total score = " + secondsLeft;
+            return;
+        }
+        questionDiv.appendChild(option);
+
+    }
+    questionsEl.appendChild(questionDiv);
+
+}
+// Show the score, allow to clear
+function showScores(){  
+  listScores.innerHTML = "";
+
+for (var j = 0; j < userInitials.length; j ++){ 
+    var characters = userInitials[j];
+
+    var list = document.createElement("li");
+    list.textContent = characters;
+    list.setAttribute("data-index", j);
+
+    var clearBtn= document.createElement("Button");
+    clearBtn.textContent= "Clear";
+
+
+    list.appendChild(clearBtn);
+    listScores.appendChild(list);
+}
+
+
+}
+// storage of user information
+ function initials() {
+     var userScores = JSON.parse(localStorage.getItem("userInitials"));
+
+     if (userScores !==null) {
+         userInitials = userScores;
+     }
+     const submitButton = document.querySelector("#submit");
+
+     submitButton.addEventListener("click", function () {
+         event.preventDefault();
+         
+         var initialChar =initialEl.value.trim();
+        
+         if (initialChar === "") {
+             return;
+         }
+         userInitials.push(initialChar + " " + secondsLeft);
+        //  console.log(userInitials);
+         initialEl.value= "";
+         
+         document.querySelector(".finalScore").style.display="none";
+         document.querySelector(".highPage").style.display="block";
+         
+         
+         scoreStorage();
+         showScores();
+
+        });
+ }
+// storage of user information
+
+function scoreStorage() {
+    localStorage.setItem("userInitials", JSON.stringify(userInitials));
+}
+
+listScores.addEventListener("click",function (event) {
+    var element = event.target;
+
+    if (element.matches("button")=== true) {
+        var index = element.parentElement.getAttribute("data-index");
+        userInitials.splice(index, 1);
+
+        scoreStorage();
+        showScores();
+        
+    }
+});
+ initials();
+//////////////////////////////////////
+
