@@ -50,12 +50,12 @@ startBtn.addEventListener("click",function () {
     setTime();
     startBtn.style.display="none";
     document.querySelector(".homePage").style.display="none";
-    enterQuestions(questionIndex);
+    showQuestions(questionIndex);
 } )
 
 var questionIndex = 0;
 // enter questions and choices
-function enterQuestions(){  
+function showQuestions(){  
 
     questionsEl.textContent = "";
     var question = questions[questionIndex];
@@ -75,12 +75,12 @@ function enterQuestions(){
             if(optionChosen === questions[questionIndex].answer){  
 
                 alert("correct!");
-                enterQuestions(questionIndex++);
+                showQuestions(questionIndex++);
             }
             else{   
                 alert("Wrong!");
-                enterQuestions(questionIndex++);
-                secondsLeft -=15;
+                showQuestions(questionIndex++);
+                secondsLeft -=10;
             }
                 
             

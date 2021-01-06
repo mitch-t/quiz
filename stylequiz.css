@@ -1,9 +1,8 @@
-#start{
-    background-color: rgb(173, 196, 209);
-    border: 1px solid #1D3C6A;
+body{
+    background-color: rgb(220, 228, 253);
 }
-#intro{
-    text-align: right;
+.container{
+    background-color: azure;
 }
 .time{
     text-align: right;
